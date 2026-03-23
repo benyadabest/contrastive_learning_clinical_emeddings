@@ -6,7 +6,6 @@ __pycache__/
 embeddings/
 models/
 results/
-data/
 .aidex/
 *.npy
 mimic-iii-clinical-database-demo-1.4/
