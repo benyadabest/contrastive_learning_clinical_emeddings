@@ -14,13 +14,14 @@ from pathlib import Path
 
 import pandas as pd
 
-MIMIC_DIR = Path(__file__).resolve().parent.parent / "mimic-iii-clinical-database-demo-1.4"
+MIMIC_DIR = Path(__file__).resolve().parent.parent / "MIMIC -III (10000 patients)"
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data"
 
 
 def load_noteevents(mimic_dir: Path) -> pd.DataFrame:
     """Load and clean NOTEEVENTS, sorted by patient and time."""
-    df = pd.read_csv(mimic_dir / "NOTEEVENTS.csv", parse_dates=["chartdate", "charttime"])
+    df = pd.read_csv(mimic_dir / "NOTEEVENTS/NOTEEVENTS_sorted.csv", parse_dates=["CHARTDATE", "CHARTTIME"])
+    df.columns = map(str.lower, df.columns)
     df = df[df["iserror"] != 1].copy()
     df = df.dropna(subset=["text"])
     df["text"] = df["text"].str.strip()
@@ -31,20 +32,26 @@ def load_noteevents(mimic_dir: Path) -> pd.DataFrame:
 
 def load_diagnoses(mimic_dir: Path) -> pd.DataFrame:
     """Load ICD-9 diagnoses with descriptions."""
-    diag = pd.read_csv(mimic_dir / "DIAGNOSES_ICD.csv")
-    d_icd = pd.read_csv(mimic_dir / "D_ICD_DIAGNOSES.csv")
+    diag = pd.read_csv(mimic_dir / "DIAGNOSES_ICD/DIAGNOSES_ICD_sorted.csv")
+    d_icd = pd.read_csv(mimic_dir / "D_ICD_DIAGNOSES/D_ICD_DIAGNOSES.csv")
+    diag.columns = map(str.lower, diag.columns)
+    d_icd.columns = map(str.lower, d_icd.columns)
     diag = diag.merge(d_icd[["icd9_code", "short_title", "long_title"]], on="icd9_code", how="left")
     return diag
 
 
 def load_admissions(mimic_dir: Path) -> pd.DataFrame:
     """Load admissions data."""
-    return pd.read_csv(mimic_dir / "ADMISSIONS.csv", parse_dates=["admittime", "dischtime"])
+    admits = pd.read_csv(mimic_dir / "ADMISSIONS/ADMISSIONS_sorted.csv", parse_dates=["ADMITTIME", "DISCHTIME"])
+    admits.columns = map(str.lower, admits.columns)
+    return admits
 
 
 def load_patients(mimic_dir: Path) -> pd.DataFrame:
     """Load patient demographics."""
-    return pd.read_csv(mimic_dir / "PATIENTS.csv", parse_dates=["dob", "dod"])
+    patients = pd.read_csv(mimic_dir / "PATIENTS/PATIENTS_sorted.csv", parse_dates=["DOB", "DOD"])
+    patients.columns = map(str.lower, patients.columns)
+    return patients
 
 
 def build_temporal_pairs(notes: pd.DataFrame) -> list[dict]:
