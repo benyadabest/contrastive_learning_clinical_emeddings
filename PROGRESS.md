@@ -46,8 +46,7 @@
 
 ### Blockers / Next Steps
 
-1. **Get full MIMIC-III NOTEEVENTS**: The demo dataset has no clinical notes. Apply on PhysioNet or use the Kaggle download.
-2. **Run baseline embeddings**: Once notes are available:
+1. **Run baseline embeddings**: Once notes are available:
    ```bash
    source .venv/bin/activate
    python src/preprocess.py
@@ -55,18 +54,18 @@
    python src/embed.py --mode pairs --model text-embedding-3-small
    python src/embed.py --mode pairs --model text-embedding-3-large
    ```
-3. **Run contrastive fine-tuning**:
+2. **Run contrastive fine-tuning**:
    ```bash
    python src/train_contrastive.py --loss infonce --epochs 5
    python src/train_contrastive.py --loss hierarchical --epochs 10
    ```
-4. **Evaluate**:
+3. **Evaluate**:
    ```bash
    python src/evaluate.py --task compare
    python src/evaluate.py --task umap --embeddings embeddings/<file>.npy
    ```
-5. **Baseten deployment**: Deploy fine-tuned model as embedding service
-6. **Fasten Health integration**: Connect embeddings to patient record layer
+4. **Baseten deployment**: Deploy fine-tuned model as embedding service
+5. **Fasten Health integration**: Connect embeddings to patient record layer
 
 ### Project Structure
 ```

@@ -18,7 +18,9 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Requires MIMIC-III data in `mimic-iii-clinical-database-demo-1.4/`. The demo dataset has structured data but no clinical notes — the full dataset from [PhysioNet](https://physionet.org/content/mimiciii/1.4/) is needed for training.
+*Formerly* required MIMIC-III data in `mimic-iii-clinical-database-demo-1.4/`. The demo dataset has structured data but no clinical notes — the full dataset is located at [PhysioNet](https://physionet.org/content/mimiciii/1.4/).
+
+Now requires MIMIC-III data in `MIMIC -III (10000 patients)/`, which can be downloaded from [Kaggle](https://www.kaggle.com/datasets/bilal1907/mimic-iii-10k). This dataset is a subset of the full dataset with all tables included.
 
 ## Usage
 
