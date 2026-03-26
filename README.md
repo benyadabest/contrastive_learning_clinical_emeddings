@@ -29,7 +29,7 @@ Now requires MIMIC-III data in `MIMIC -III (10000 patients)/`, which can be down
 python src/preprocess.py
 
 # 2. Generate baseline embeddings
-python src/embed.py --mode pairs --model google/embeddinggemma-300m
+python src/embed.py --mode pairs --model library-model-embeddinggemma
 python src/embed.py --mode pairs --model text-embedding-3-small
 
 # 3. Fine-tune with contrastive loss

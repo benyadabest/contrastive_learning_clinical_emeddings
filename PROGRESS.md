@@ -50,7 +50,7 @@
    ```bash
    source .venv/bin/activate
    python src/preprocess.py
-   python src/embed.py --mode pairs --model google/embeddinggemma-300m
+   python src/embed.py --mode pairs --model library-model-embeddinggemma
    python src/embed.py --mode pairs --model text-embedding-3-small
    python src/embed.py --mode pairs --model text-embedding-3-large
    ```
