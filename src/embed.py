@@ -33,7 +33,7 @@ gemma_preference = RequestProcessingPreference(
     max_chars_per_request=10000,
     hedge_delay=0.5,
     timeout_s=360,
-    total_timeout_s=6000
+    total_timeout_s=1800
 )
 gemma_model_name = "library-model-embeddinggemma"
 
@@ -148,9 +148,9 @@ def embed_temporal_pairs(
         pos_embs = embed_with_openai(positives, model_name=model_name, batch_size=batch_size)
     else:
         #model = load_model(model_name)
-        print("Encoding anchors...")
+        print(f"Encoding anchors ({len(anchors)} texts to embed)...")
         anchor_embs = embed_texts(gemma_client, gemma_preference, model_name, anchors, batch_size=batch_size)
-        print("Encoding positives...")
+        print(f"Encoding positives ({len(positives)} texts to embed)...")
         pos_embs = embed_texts(gemma_client, gemma_preference, model_name, positives, batch_size=batch_size)
 
     safe_name = model_name.replace("/", "_").replace("-", "_")
