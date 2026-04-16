@@ -155,7 +155,7 @@ def train(
     print(f"Loading model: {model_name}")
     model = SentenceTransformer(model_name)
     tokenizer = model.tokenizer
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Device: {device}")
 
     # Move the underlying transformer to device

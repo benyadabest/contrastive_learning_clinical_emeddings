@@ -24,7 +24,7 @@ EMBEDDINGS_DIR = Path(__file__).resolve().parent.parent / "embeddings"
 load_dotenv()
 
 gemma_client = PerformanceClient(
-    base_url="https://model-qrj9z513.api.baseten.co/environments/production/sync",
+    base_url="https://model-wx460ozq.api.baseten.co/environments/production/sync",
     api_key=os.getenv("BASETEN_API_KEY")
 )
 gemma_preference = RequestProcessingPreference(
